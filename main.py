@@ -55,13 +55,13 @@ def get_content_page(html):
             name = block.find('span', {'data-test-block': "ProductName"}).text
         except:
             name = 'Без названия'
-        # try:
-        #     img_source = block.image.get('xlink:href')
-        #     img_data = requests.get(img_source).content
-        #     with open(f'img/{name}.jpg', 'wb') as handler:
-        #         handler.write(img_data)
-        # except:
-        #     img_source = 'Фото отсутствует'
+        try:
+            img_source = block.image.get('xlink:href')
+            img_data = requests.get(img_source).content
+            with open(f'img/{name}.jpg', 'wb') as handler:
+                handler.write(img_data)
+        except:
+            img_source = 'Фото отсутствует'
 
         try:
             link = "https://youla.ru" + block.find('div').find('span').find('a').get('href')
